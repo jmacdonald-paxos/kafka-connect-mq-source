@@ -281,7 +281,7 @@ public class JMSReader {
                 // to commit once we've passed it on to Kafka. Temporarily mark the transaction as "in-peril"
                 // so that any exception thrown will result in the transaction rolling back instead of committing.
                 inperil = true;
-
+                log.debug("MQ message received: {}", m);
                 sr = builder.toSourceRecord(jmsCtxt, topic, messageBodyJms, m);
                 inperil = false;
             }

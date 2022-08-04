@@ -123,12 +123,11 @@ public class MQSourceTask extends SourceTask {
                     // For the first message in the batch, wait a while if no message
                     src = reader.receive(messageCount == 0);
 
-                    log.debug("Source record key {}, value: {}, topic: {}, partition: {}",
-                            src.key(), src.value(), src.topic(), src.sourcePartition());
-
                     if (src != null) {
                         msgs.add(src);
                         messageCount++;
+                        log.debug("Source record key {}, value: {}, topic: {}, partition: {}",
+                                src.key(), src.value(), src.topic(), src.sourcePartition());
                     }
                 } while ((src != null) && (messageCount < batchSize) && !stopNow.get());
             }
